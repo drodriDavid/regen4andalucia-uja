@@ -23,18 +23,37 @@ servidor ni se almacena.
 
 Sin la contraseña, lo que hay aquí es ruido.
 
-## Regenerar la página
+## Publicar cambios
 
-Hace falta el documento en claro (`fuente.html`, ignorado por git) y Python con
-`cryptography`:
+Edita `fuente.html` (el documento en claro, ignorado por git) y lanza el script
+que corresponda a tu consola. Cifra, confirma y sube en un solo paso.
 
-```
-python build.py fuente.html                 # genera contraseña nueva
-python build.py fuente.html --pass "MI-FRASE-DE-PASO"
-```
+**PowerShell** (la consola por defecto de Windows):
 
-El script escribe `index.html`. Cambiar la contraseña implica volver a ejecutarlo
-y publicar el `index.html` resultante.
+    cd C:/GEU/regen4andalucia-uja
+    .\publicar.ps1
+
+**Git Bash / WSL:**
+
+    cd C:/GEU/regen4andalucia-uja && ./publicar.sh
+
+Para cambiar además la contraseña, pásala como argumento:
+
+    .\publicar.ps1 "MI-FRASE-NUEVA"
+    ./publicar.sh  "MI-FRASE-NUEVA"
+
+Sin argumento se mantiene la contraseña actual.
+
+Notas de consola: en **Windows PowerShell 5.1** el operador `&&` no existe (llegó
+en PowerShell 7); encadena con `;` o lanza los comandos en líneas separadas.
+Y usa barras normales (`C:/GEU/...`): en bash la barra invertida es un carácter
+de escape y rompe la ruta.
+
+Cifrar a mano, sin publicar:
+
+    python build.py fuente.html --pass "MI-FRASE"
+
+Requiere Python con el paquete `cryptography`.
 
 ## Origen de los datos
 
