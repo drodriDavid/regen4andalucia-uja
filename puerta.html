@@ -13,30 +13,53 @@
   --bg:#F1F2ED; --surface:#FBFBF8; --surface-2:#E6E9DF; --line:#D4D8CA;
   --ink:#191E16; --ink-2:#485043; --ink-3:#6D7667;
   --field:#54721E; --data:#2B4B7B; --risk:#98381F; --on-accent:#FBFBF8;
+  --bg2:#E5E3D6; --suelo:107,74,42; --olivo:84,114,30; --agua:43,75,123; --trazo:.11;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#111409; --surface:#191D13; --surface-2:#232819; --line:#333A28;
     --ink:#ECEFE3; --ink-2:#B2B9A5; --ink-3:#858D78;
     --field:#A3C954; --data:#83ABE3; --risk:#E37A5C; --on-accent:#111409;
+    --bg2:#0B0E06; --suelo:150,104,58; --olivo:163,201,84; --agua:131,171,227; --trazo:.09;
   }
 }
 :root[data-theme="dark"]{
   --bg:#111409; --surface:#191D13; --surface-2:#232819; --line:#333A28;
   --ink:#ECEFE3; --ink-2:#B2B9A5; --ink-3:#858D78;
   --field:#A3C954; --data:#83ABE3; --risk:#E37A5C; --on-accent:#111409;
+  --bg2:#0B0E06; --suelo:150,104,58; --olivo:163,201,84; --agua:131,171,227; --trazo:.09;
 }
 *{box-sizing:border-box}
-html,body{min-height:100%}
+html{height:100%}
+body{min-height:100vh; min-height:100dvh}
 body{
-  margin:0; background:var(--bg); color:var(--ink);
+  margin:0; background:transparent; color:var(--ink);
   font-family:"Archivo","Helvetica Neue",Arial,sans-serif; font-size:16px; line-height:1.55;
   -webkit-font-smoothing:antialiased; display:grid; place-items:center; padding:28px 20px;
+  position:relative; isolation:isolate;
 }
+/* Curvas de nivel de una ladera: el terreno del que trata el proyecto.
+   Se pinta en la raiz para que cubra siempre todo el lienzo. */
+html{
+  background:
+    repeating-radial-gradient(ellipse 140% 95% at 8% 116%,
+      transparent 0 42px, rgba(var(--suelo),var(--trazo)) 42px 43.5px),
+    repeating-radial-gradient(ellipse 120% 105% at 97% -12%,
+      transparent 0 52px, rgba(var(--olivo),var(--trazo)) 52px 53.5px),
+    repeating-radial-gradient(ellipse 90% 130% at 62% 128%,
+      transparent 0 74px, rgba(var(--agua),calc(var(--trazo) * .75)) 74px 75px),
+    radial-gradient(62% 58% at 6% 112%, rgba(var(--suelo),.22), transparent 72%),
+    radial-gradient(58% 52% at 99% -8%, rgba(var(--olivo),.20), transparent 70%),
+    radial-gradient(120% 90% at 50% 50%, transparent 45%, rgba(var(--suelo),.07) 100%),
+    linear-gradient(178deg, var(--bg) 0%, var(--bg2) 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
 .puerta{
   width:100%; max-width:920px; display:grid; grid-template-columns:1.12fr .88fr;
   border:1px solid var(--line); border-radius:5px; overflow:hidden; background:var(--surface);
-  box-shadow:0 1px 2px rgba(25,30,22,.05), 0 24px 60px -30px rgba(25,30,22,.42);
+  box-shadow:0 1px 2px rgba(25,30,22,.06), 0 32px 70px -28px rgba(25,30,22,.45);
 }
 @media (max-width:760px){ .puerta{grid-template-columns:1fr; max-width:460px} }
 
