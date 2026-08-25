@@ -23,6 +23,16 @@ servidor ni se almacena.
 
 Sin la contraseña, lo que hay aquí es ruido.
 
+## Identidad
+
+La paleta y el logo salen de la imagen corporativa del proyecto: azul marino
+`#22386B`, azules `#1F5FA8` / `#2E6DB4` / `#3E86C6`, verdes `#5E9B3E` / `#74B04B`
+/ `#A9CE77` y amarillo `#F5CE4E`. El logotipo va reconstruido como SVG en línea
+(mosaico y sol) porque en el Drive solo existe incrustado en el tríptico; si
+aparece el original vectorial, sustituye el bloque `MARCA` de `puerta.html` y de
+`fuente.html`. Todos los pares de color verificados sobre WCAG AA en tema claro
+y oscuro.
+
 ## Publicar cambios
 
 Edita `fuente.html` (el documento en claro, ignorado por git) y lanza el script

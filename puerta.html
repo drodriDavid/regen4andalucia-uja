@@ -10,24 +10,53 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
-  --bg:#F1F2ED; --surface:#FBFBF8; --surface-2:#E6E9DF; --line:#D4D8CA;
-  --ink:#191E16; --ink-2:#485043; --ink-3:#6D7667;
-  --field:#54721E; --data:#2B4B7B; --risk:#98381F; --on-accent:#FBFBF8;
-  --bg2:#E5E3D6; --suelo:107,74,42; --olivo:84,114,30; --agua:43,75,123; --trazo:.11;
+  --bg:#F1F4F7; --surface:#FFFFFF; --surface-2:#E7EDF3; --line:#CCD7E2;
+  --ink:#16223D; --ink-2:#44526C; --ink-3:#5F6D85;
+  --field:#3F7322; --data:#22386B; --risk:#A2382A; --on-accent:#FFFFFF;
+  --bg2:#E5E3D6; --suelo:34,56,107; --olivo:116,176,75; --agua:46,109,180; --trazo:.11;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#111409; --surface:#191D13; --surface-2:#232819; --line:#333A28;
-    --ink:#ECEFE3; --ink-2:#B2B9A5; --ink-3:#858D78;
-    --field:#A3C954; --data:#83ABE3; --risk:#E37A5C; --on-accent:#111409;
-    --bg2:#0B0E06; --suelo:150,104,58; --olivo:163,201,84; --agua:131,171,227; --trazo:.09;
+    --bg:#0D1421; --surface:#151F30; --surface-2:#1D283C; --line:#2D3A52;
+    --ink:#E8EEF7; --ink-2:#AAB8CD; --ink-3:#7C8BA3;
+    --field:#8FC85E; --data:#7FA8E4; --risk:#E58166; --on-accent:#0D1421;
+    --bg2:#0B0E06; --suelo:127,168,228; --olivo:143,200,94; --agua:100,146,205; --trazo:.09;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#111409; --surface:#191D13; --surface-2:#232819; --line:#333A28;
-  --ink:#ECEFE3; --ink-2:#B2B9A5; --ink-3:#858D78;
-  --field:#A3C954; --data:#83ABE3; --risk:#E37A5C; --on-accent:#111409;
-  --bg2:#0B0E06; --suelo:150,104,58; --olivo:163,201,84; --agua:131,171,227; --trazo:.09;
+  --bg:#0D1421; --surface:#151F30; --surface-2:#1D283C; --line:#2D3A52;
+  --ink:#E8EEF7; --ink-2:#AAB8CD; --ink-3:#7C8BA3;
+  --field:#8FC85E; --data:#7FA8E4; --risk:#E58166; --on-accent:#0D1421;
+  --bg2:#0B0E06; --suelo:127,168,228; --olivo:143,200,94; --agua:100,146,205; --trazo:.09;
+}
+
+/* ---------- identidad del proyecto ---------- */
+.marca-proy{display:flex; align-items:center; gap:11px; min-width:0}
+.marca-svg{width:auto; flex:none; display:block}
+.marca-txt{display:flex; flex-direction:column; justify-content:center; min-width:0; line-height:1}
+.marca-txt .mt1{
+  font-family:"Archivo",sans-serif; font-weight:700; letter-spacing:.01em;
+  color:var(--data); white-space:nowrap;
+}
+.marca-txt .mt1 i{font-style:normal; color:var(--field)}
+.marca-txt .mt2{
+  font-family:"Archivo",sans-serif; color:var(--data); white-space:nowrap;
+  letter-spacing:.34em; text-transform:none;
+}
+:root[data-theme="dark"] .marca-txt .mt1,
+:root[data-theme="dark"] .marca-txt .mt2{color:var(--ink)}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .marca-txt .mt1,
+  :root:not([data-theme="light"]) .marca-txt .mt2{color:var(--ink)}
+}
+
+.izq .marca-svg{height:64px}
+.izq .marca-txt .mt1{font-size:31px}
+.izq .marca-txt .mt2{font-size:12.5px; letter-spacing:.35em; margin-top:4px}
+@media (max-width:760px){
+  .izq .marca-svg{height:52px}
+  .izq .marca-txt .mt1{font-size:26px}
+  .izq .marca-txt .mt2{font-size:11px}
 }
 *{box-sizing:border-box}
 html{height:100%}
@@ -130,15 +159,34 @@ button.trabajando .girador{display:block}
 
 <main class="puerta">
   <section class="izq">
-    <p class="sello"><b>REGEN4ANDALUCIA</b> &middot; FEDER Andaluc&iacute;a 21-27</p>
+    <div class="marca-proy" style="margin-bottom:20px">
+      <svg class="marca-svg" viewBox="0 0 200 118" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<g>
+<polygon points="18,58 33,26 53,31 47,66" fill="#3E86C6"/>
+<polygon points="56,24 77,11 91,29 74,45" fill="#1F5FA8"/>
+<polygon points="94,15 116,18 120,40 97,45" fill="#2E6DB4"/>
+<polygon points="124,20 152,29 146,53 121,45" fill="#3E86C6"/>
+<circle cx="106" cy="56" r="13" fill="#F5CE4E"/>
+<polygon points="154,35 176,50 163,76 141,65" fill="#74B04B"/>
+<polygon points="152,80 172,73 165,99 146,94" fill="#A9CE77"/>
+<polygon points="72,60 120,59 129,85 98,94 76,81" fill="#5E9B3E"/>
+<polygon points="46,68 70,63 75,83 63,107 52,89" fill="#74B04B"/>
+</g>
+</svg>
+      <span class="marca-txt">
+        <span class="mt1">REGEN<i>4</i></span>
+        <span class="mt2">Andaluc&iacute;a</span>
+      </span>
+    </div>
+    <p class="sello">FEDER Andaluc&iacute;a 21-27 &middot; ceiA3</p>
     <h1>Cuaderno de trabajo de la <em>UJA</em></h1>
     <p class="claim">
       Living Lab andaluz de Agricultura de Conservaci&oacute;n y Regenerativa. Seguimiento del encargo de la
       Universidad de Ja&eacute;n: tareas, plazos, documentaci&oacute;n del consorcio y compromisos adquiridos.
     </p>
     <div class="franja" aria-hidden="true">
-      <i style="background:#6B4A2A"></i><i style="background:#8A6438"></i><i style="background:#A8834B"></i>
-      <i style="background:var(--field)"></i><i style="background:var(--data)"></i>
+      <i style="background:#1F5FA8"></i><i style="background:#2E6DB4"></i><i style="background:#3E86C6"></i>
+      <i style="background:#F5CE4E"></i><i style="background:#74B04B"></i><i style="background:#A9CE77"></i>
     </div>
     <div class="datos">
       <div><div class="v">36</div><div class="l">meses<br>mar 26 &ndash; feb 29</div></div>
@@ -157,10 +205,6 @@ button.trabajando .girador{display:block}
       <button id="b" type="submit"><span class="girador"></span><span id="btxt">Abrir el cuaderno</span></button>
       <p class="msg" id="m" role="status" aria-live="polite"></p>
     </form>
-    <p class="candado">
-      <b>AES-256-GCM.</b> El descifrado ocurre en tu navegador con una clave derivada de la contrase&ntilde;a
-      mediante PBKDF2. Ni la contrase&ntilde;a ni el contenido pasan por ning&uacute;n servidor.
-    </p>
   </section>
 </main>
 
