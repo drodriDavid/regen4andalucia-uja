@@ -1,9 +1,18 @@
-# Compromisos de la UJA en REGEN4ANDALUCIA
+# Cuaderno REGEN4ANDALUCIA · UJA
 
-Web interactiva con el inventario de compromisos de la Universidad de Jaén en el
-proyecto REGEN4ANDALUCIA (Living Lab andaluz de Agricultura de Conservación y
-Regenerativa, FEDER Andalucía 21-27): actividades, hitos, indicadores,
-presupuesto, fincas, infraestructura, equipo y puntos críticos.
+Cuaderno de trabajo interactivo para el seguimiento del proyecto REGEN4ANDALUCIA
+(Living Lab andaluz de Agricultura de Conservación y Regenerativa, FEDER
+Andalucía 21-27) desde la Universidad de Jaén.
+
+Ocho vistas: panel de situación, tareas, notas, bitácora, documentos del Drive
+empotrados, cronograma de 36 meses con hitos, objetivos generales del proyecto y
+el encargo concreto de la UJA (actividades, indicadores, presupuesto, fincas,
+infraestructura de AEROLAB, equipo y puntos críticos).
+
+Tareas, notas, bitácora, estado de los hitos y enlaces propios se editan desde la
+propia página y se guardan en el `localStorage` del navegador. Viven solo en ese
+navegador: usa el botón **Copia** para descargar una copia de seguridad en JSON y
+**Restaurar** para recuperarla en otro equipo.
 
 **El contenido está cifrado.** Este repositorio es público porque GitHub Pages lo
 exige, así que `index.html` no contiene el documento en claro: contiene el
