@@ -33,6 +33,24 @@ aparece el original vectorial, sustituye el bloque `MARCA` de `puerta.html` y de
 `fuente.html`. Todos los pares de color verificados sobre WCAG AA en tema claro
 y oscuro.
 
+## Compartir el cuaderno entre varias personas
+
+Lo que se escribe en el cuaderno (tareas, notas, bitácora, estados, gasto) vive
+por defecto en el `localStorage` del navegador: cada persona y cada equipo ve lo
+suyo. Para compartirlo, el indicador de la barra superior abre la configuración
+de sincronización.
+
+El cuaderno guarda entonces un archivo `cuaderno-regen4andalucia-uja.json` en
+**una carpeta del Drive de quien lo configura**, no en la del consorcio. Esa
+carpeta se comparte solo con quien deba ver el cuaderno: los permisos los
+gestiona Google. Si no se indica ninguna, se crea «Cuaderno REGEN4ANDALUCIA
+(UJA)» en Mi unidad.
+
+Al abrir, el cuaderno comprueba si el archivo cambió y trae lo nuevo; cada
+cambio local se sube a los pocos segundos. Requiere el mismo ID de cliente OAuth
+que el Drive en vivo, con permiso de Drive (no solo lectura), porque tiene que
+poder abrir un archivo que quizá creó otra persona del equipo.
+
 ## Drive en vivo
 
 El explorador de Drive trae un índice incrustado de la carpeta del consorcio
