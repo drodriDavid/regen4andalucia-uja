@@ -10,18 +10,27 @@
 set -e
 cd "$(dirname "$0")"
 
+# Nada en claro vive aqui: las piezas y la clave estan en el repositorio
+# privado de fuentes, al lado de este.
+FUENTES="../fuentes/$(basename "$PWD")"
+if [ ! -d "$FUENTES" ]; then
+  echo "ERROR: no encuentro las fuentes en $FUENTES" >&2
+  echo "       Clona el repositorio privado de fuentes al lado de este." >&2
+  exit 1
+fi
+
 CLAVE="$1"
 if [ -z "$CLAVE" ]; then
-  if [ ! -f clave.txt ]; then
+  if [ ! -f "$FUENTES/clave.txt" ]; then
     echo "ERROR: falta clave.txt y no has pasado ninguna clave." >&2
     exit 1
   fi
-  CLAVE=$(tr -d ' \t\r\n' < clave.txt)
+  CLAVE=$(tr -d ' \t\r\n' < "$FUENTES/clave.txt")
 fi
 
 echo "-> Cifrando fuente.html..."
-python build.py fuente.html --pass "$CLAVE"
-printf '%s' "$CLAVE" > clave.txt
+python build.py "$FUENTES/fuente.html" --pass "$CLAVE"
+printf '%s' "$CLAVE" > "$FUENTES/clave.txt"
 
 echo "-> Publicando..."
 git add -A

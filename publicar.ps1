@@ -15,24 +15,34 @@ param([string]$Clave = "")
 $raiz = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location -LiteralPath $raiz
 
+# Nada en claro vive aqui: las piezas y la clave estan en el repositorio
+# privado de fuentes, al lado de este.
+$fuentes = Join-Path (Split-Path -Parent $raiz) ("fuentes\" + (Split-Path -Leaf $raiz))
+if (-not (Test-Path $fuentes)) {
+    Write-Host "ERROR: no encuentro las fuentes en $fuentes" -ForegroundColor Red
+    Write-Host "       Clona el repositorio privado de fuentes en la carpeta 'fuentes'," -ForegroundColor DarkGray
+    Write-Host "       al lado de este repositorio." -ForegroundColor DarkGray
+    exit 1
+}
+
 if ($Clave -eq "") {
-    if (-not (Test-Path "clave.txt")) {
+    if (-not (Test-Path (Join-Path $fuentes "clave.txt"))) {
         Write-Host "ERROR: falta clave.txt y no has pasado ninguna clave." -ForegroundColor Red
         Write-Host "       Escribe la clave del cuaderno en clave.txt, o lanza:" -ForegroundColor DarkGray
         Write-Host '       .\publicar.ps1 "TU-CLAVE"' -ForegroundColor DarkGray
         exit 1
     }
-    $Clave = (Get-Content "clave.txt" -Raw).Trim()
+    $Clave = (Get-Content (Join-Path $fuentes "clave.txt") -Raw).Trim()
 }
 
 Write-Host ""
 Write-Host "-> Cifrando fuente.html..." -ForegroundColor DarkGray
-python build.py fuente.html --pass $Clave
+python build.py (Join-Path $fuentes "fuente.html") --pass $Clave
 if ($LASTEXITCODE -ne 0) {
     Write-Host "ERROR: no se pudo cifrar. Revisa que Python y 'cryptography' esten instalados." -ForegroundColor Red
     exit 1
 }
-Set-Content -Path "clave.txt" -Value $Clave -NoNewline -Encoding UTF8
+Set-Content -Path (Join-Path $fuentes "clave.txt") -Value $Clave -NoNewline -Encoding UTF8
 
 Write-Host "-> Publicando en GitHub..." -ForegroundColor DarkGray
 git add -A

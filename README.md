@@ -58,12 +58,12 @@ que corresponda a tu consola. Cifra, confirma y sube en un solo paso.
 
 **PowerShell** (la consola por defecto de Windows):
 
-    cd C:/GEU/regen4andalucia-uja
+    cd C:/ProyectosUJA/regen4andalucia-uja
     .\publicar.ps1
 
 **Git Bash / WSL:**
 
-    cd C:/GEU/regen4andalucia-uja && ./publicar.sh
+    cd C:/ProyectosUJA/regen4andalucia-uja && ./publicar.sh
 
 La clave se lee de `clave.txt`, que git ignora. Para cambiarla, pásala como
 argumento:
@@ -81,7 +81,7 @@ aparecido varias colisiones de nombres que rompieron la página en silencio.
 
 Notas de consola: en **Windows PowerShell 5.1** el operador `&&` no existe (llegó
 en PowerShell 7); encadena con `;` o lanza los comandos en líneas separadas.
-Y usa barras normales (`C:/GEU/...`): en bash la barra invertida es un carácter
+Y usa barras normales (`C:/ProyectosUJA/...`): en bash la barra invertida es un carácter
 de escape y rompe la ruta.
 
 Cifrar a mano, sin publicar:
