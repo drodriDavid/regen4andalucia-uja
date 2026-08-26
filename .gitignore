@@ -1,3 +1,6 @@
 # El documento en claro nunca se publica.
 fuente.html
 *.plain.html
+
+# La clave del cuaderno vive en Drive, no en el repositorio.
+clave.txt

@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
-Cifra la web de compromisos de la UJA y genera el index.html que la sirve
-tras pedir la contrasena.
+Cifra el cuaderno de la UJA y genera el index.html que lo sirve tras entrar
+con Google.
 
 El contenido se cifra con AES-256-GCM y la clave se deriva de la frase de
 paso con PBKDF2-HMAC-SHA256. Lo que se publica en GitHub Pages es texto
-cifrado: sin la contrasena no hay nada legible en el repositorio.
+cifrado: sin la clave no hay nada legible en el repositorio. La clave la lee
+la portada de un archivo guardado en la carpeta de Drive del cuaderno, que
+solo esta compartida con la gente de la UJA.
 
 Uso:
     python build.py <fuente.html> [--pass FRASE]
@@ -58,15 +60,21 @@ def portada(salt_b64, iv_b64, ct_b64):
     # El blob va troceado en lineas para que el archivo siga siendo legible en git.
     trozos = [ct_b64[i:i + 120] for i in range(0, len(ct_b64), 120)]
     blob = "\n".join('"' + t + '",' for t in trozos)
-    return plantilla().replace("__SALT__", salt_b64) \
+    return plantilla().replace("__LOGO__", logo()) \
+                    .replace("__SALT__", salt_b64) \
                     .replace("__IV__", iv_b64) \
                     .replace("__ITER__", str(ITERATIONS)) \
                     .replace("__BLOB__", blob)
 
 
 def plantilla():
-    """La portada con el formulario de contrasena vive en puerta.html."""
+    """La portada, que pide entrar con Google, vive en puerta.html."""
     return io.open("puerta.html", encoding="utf-8").read()
+
+
+def logo():
+    """El logo del proyecto va aparte para no ensuciar la portada."""
+    return io.open("logo.b64", encoding="utf-8").read().strip()
 
 
 def main():
@@ -84,7 +92,7 @@ def main():
 
     io.open(args.salida, "w", encoding="utf-8").write(portada(salt_b64, iv_b64, ct_b64))
 
-    print("contrasena: " + frase)
+    print("clave: " + frase)
     print("iteraciones: %d" % ITERATIONS)
     print("documento en claro: %d bytes" % len(doc.encode("utf-8")))
     print("salida: %s (%d bytes)" % (args.salida, os.path.getsize(args.salida)))

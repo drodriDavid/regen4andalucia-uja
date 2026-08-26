@@ -4,71 +4,52 @@ Cuaderno de trabajo interactivo para el seguimiento del proyecto REGEN4ANDALUCIA
 (Living Lab andaluz de Agricultura de Conservación y Regenerativa, FEDER
 Andalucía 21-27) desde la Universidad de Jaén.
 
-Ocho vistas: panel de situación, tareas, notas, bitácora, documentos del Drive
-empotrados, cronograma de 36 meses con hitos, objetivos generales del proyecto y
-el encargo concreto de la UJA (actividades, indicadores, presupuesto, fincas,
-infraestructura de AEROLAB, equipo y puntos críticos).
+Nueve vistas: resumen del proyecto, panel de situación, tareas, notas, bitácora,
+documentos del Drive empotrados, personas del Living Lab, cronograma de 36 meses
+con hitos y presupuesto con registro de gasto.
 
-Tareas, notas, bitácora, estado de los hitos y enlaces propios se editan desde la
-propia página y se guardan en el `localStorage` del navegador. Viven solo en ese
-navegador: usa el botón **Copia** para descargar una copia de seguridad en JSON y
-**Restaurar** para recuperarla en otro equipo.
+## Cómo se entra
 
-**El contenido está cifrado.** Este repositorio es público porque GitHub Pages lo
-exige, así que `index.html` no contiene el documento en claro: contiene el
-documento cifrado con **AES-256-GCM**, con la clave derivada de una frase de paso
-mediante **PBKDF2-HMAC-SHA256** (400.000 iteraciones). El descifrado ocurre
-entero en el navegador de quien visita la página; la contraseña no viaja a ningún
-servidor ni se almacena.
+Se entra **con cuenta de Google**. No hay contraseña que escribir.
 
-Sin la contraseña, lo que hay aquí es ruido.
+El repositorio es público porque GitHub Pages lo exige, así que `index.html` no
+contiene el documento en claro: contiene el documento cifrado con **AES-256-GCM**,
+con la clave derivada mediante **PBKDF2-HMAC-SHA256** (400.000 iteraciones). Sin
+la clave, lo que hay aquí es ruido.
 
-## Identidad
+La clave no la teclea nadie: vive en un archivo `clave-cuaderno.txt` dentro de la
+carpeta de Drive **Cuaderno REGEN4ANDALUCIA (UJA)**. Al pulsar «Entrar con
+Google», la portada pide acceso a Drive, busca esa carpeta, lee la clave y
+descifra la página en el propio navegador. Quien no tenga la carpeta compartida
+no puede leer nada.
 
-La paleta y el logo salen de la imagen corporativa del proyecto: azul marino
-`#22386B`, azules `#1F5FA8` / `#2E6DB4` / `#3E86C6`, verdes `#5E9B3E` / `#74B04B`
-/ `#A9CE77` y amarillo `#F5CE4E`. El logotipo va reconstruido como SVG en línea
-(mosaico y sol) porque en el Drive solo existe incrustado en el tríptico; si
-aparece el original vectorial, sustituye el bloque `MARCA` de `puerta.html` y de
-`fuente.html`. Todos los pares de color verificados sobre WCAG AA en tema claro
-y oscuro.
+Así que el control de acceso es el de Google: **compartir esa carpeta de Drive es
+dar acceso al cuaderno, y dejar de compartirla es quitarlo.** La carpeta es
+propia, nunca la del consorcio.
 
-## Compartir el cuaderno entre varias personas
+La primera vez que se estrena una clave nueva, la portada pide pegarla una sola
+vez y la deja guardada en Drive para que nadie más tenga que hacerlo.
 
-Lo que se escribe en el cuaderno (tareas, notas, bitácora, estados, gasto) vive
-por defecto en el `localStorage` del navegador: cada persona y cada equipo ve lo
-suyo. Para compartirlo, el indicador de la barra superior abre la configuración
-de sincronización.
+## Sincronización
 
-El cuaderno guarda entonces un archivo `cuaderno-regen4andalucia-uja.json` en
-**una carpeta del Drive de quien lo configura**, no en la del consorcio. Esa
-carpeta se comparte solo con quien deba ver el cuaderno: los permisos los
-gestiona Google. Si no se indica ninguna, se crea «Cuaderno REGEN4ANDALUCIA
-(UJA)» en Mi unidad.
+El cuaderno se conecta solo al entrar. Todo lo que se escribe (tareas, notas,
+bitácora, estados de hitos y riesgos, gasto) se guarda en
+`cuaderno-regen4andalucia-uja.json`, en esa misma carpeta de Drive, a los pocos
+segundos de cada cambio. Al abrir la página y al volver a la pestaña, el cuaderno
+comprueba si alguien ha escrito y trae lo nuevo.
 
-Al abrir, el cuaderno comprueba si el archivo cambió y trae lo nuevo; cada
-cambio local se sube a los pocos segundos. Requiere el mismo ID de cliente OAuth
-que el Drive en vivo, con permiso de Drive (no solo lectura), porque tiene que
-poder abrir un archivo que quizá creó otra persona del equipo.
+El indicador de la barra superior muestra el estado y, si algo falla, permite
+volver a conectar a mano.
+
+Los permisos que pide son de Drive completo, porque tiene que poder abrir y
+escribir un archivo que quizá creó otra persona del equipo. El ID de cliente
+OAuth va incrustado en la página: es público por diseño y no es un secreto.
 
 ## Drive en vivo
 
-El explorador de Drive trae un índice incrustado de la carpeta del consorcio
-(foto del 25 de agosto de 2026). Para que lea la carpeta **real** y refleje lo
-que haya en cada momento hace falta un ID de cliente OAuth propio:
-
-1. En `console.cloud.google.com`, crea o elige un proyecto.
-2. Habilita la **Google Drive API**.
-3. En *Credenciales*, crea un **ID de cliente de OAuth** de tipo *Aplicación web*.
-4. En *Orígenes autorizados de JavaScript* añade `https://drodridavid.github.io`.
-5. En la pestaña Drive del cuaderno, pulsa **Configurar acceso en vivo** y pega
-   el ID (termina en `.apps.googleusercontent.com`).
-6. Pulsa **Conectar en vivo**.
-
-El ID de cliente es público por diseño: no es un secreto y puede vivir en el
-navegador. El permiso pedido es de solo lectura (`drive.readonly`) y la sesión
-caduca en una hora. Sin configurarlo, el explorador sigue funcionando con el
-índice incrustado.
+La pestaña Drive trae un índice incrustado de la carpeta del consorcio (foto del
+25 de agosto de 2026) y, con la sesión de Google ya iniciada al entrar, lee la
+carpeta real y refleja lo que haya en cada momento.
 
 ## Publicar cambios
 
@@ -84,12 +65,19 @@ que corresponda a tu consola. Cifra, confirma y sube en un solo paso.
 
     cd C:/GEU/regen4andalucia-uja && ./publicar.sh
 
-Para cambiar además la contraseña, pásala como argumento:
+La clave se lee de `clave.txt`, que git ignora. Para cambiarla, pásala como
+argumento:
 
-    .\publicar.ps1 "MI-FRASE-NUEVA"
-    ./publicar.sh  "MI-FRASE-NUEVA"
+    .\publicar.ps1 "CLAVE-NUEVA"
+    ./publicar.sh  "CLAVE-NUEVA"
 
-Sin argumento se mantiene la contraseña actual.
+Si la cambias, **borra `clave-cuaderno.txt` de la carpeta de Drive** y vuelve a
+entrar una vez para dejar la nueva; si no, la portada seguirá intentando abrir
+con la vieja y se la pedirá a cada persona.
+
+Antes de cifrar conviene validar el JavaScript: extraer el `<script>` de
+`fuente.html` y de `puerta.html` y pasarles `node --check`. En este proyecto han
+aparecido varias colisiones de nombres que rompieron la página en silencio.
 
 Notas de consola: en **Windows PowerShell 5.1** el operador `&&` no existe (llegó
 en PowerShell 7); encadena con `;` o lanza los comandos en líneas separadas.
@@ -98,9 +86,17 @@ de escape y rompe la ruta.
 
 Cifrar a mano, sin publicar:
 
-    python build.py fuente.html --pass "MI-FRASE"
+    python build.py fuente.html --pass "MI-CLAVE"
 
 Requiere Python con el paquete `cryptography`.
+
+## Identidad
+
+La paleta y el logo salen de la imagen corporativa del proyecto: azul marino
+`#22386B`, azules `#1F5FA8` / `#2E6DB4` / `#3E86C6`, verdes `#5E9B3E` / `#74B04B`
+/ `#A9CE77` y amarillo `#F5CE4E`. El logotipo original va incrustado como data
+URI en `logo.b64`, que `build.py` inyecta en la portada. Todos los pares de color
+verificados sobre WCAG AA en tema claro y oscuro.
 
 ## Origen de los datos
 
