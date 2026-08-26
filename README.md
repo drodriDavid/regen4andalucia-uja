@@ -33,6 +33,25 @@ aparece el original vectorial, sustituye el bloque `MARCA` de `puerta.html` y de
 `fuente.html`. Todos los pares de color verificados sobre WCAG AA en tema claro
 y oscuro.
 
+## Drive en vivo
+
+El explorador de Drive trae un índice incrustado de la carpeta del consorcio
+(foto del 25 de agosto de 2026). Para que lea la carpeta **real** y refleje lo
+que haya en cada momento hace falta un ID de cliente OAuth propio:
+
+1. En `console.cloud.google.com`, crea o elige un proyecto.
+2. Habilita la **Google Drive API**.
+3. En *Credenciales*, crea un **ID de cliente de OAuth** de tipo *Aplicación web*.
+4. En *Orígenes autorizados de JavaScript* añade `https://drodridavid.github.io`.
+5. En la pestaña Drive del cuaderno, pulsa **Configurar acceso en vivo** y pega
+   el ID (termina en `.apps.googleusercontent.com`).
+6. Pulsa **Conectar en vivo**.
+
+El ID de cliente es público por diseño: no es un secreto y puede vivir en el
+navegador. El permiso pedido es de solo lectura (`drive.readonly`) y la sesión
+caduca en una hora. Sin configurarlo, el explorador sigue funcionando con el
+índice incrustado.
+
 ## Publicar cambios
 
 Edita `fuente.html` (el documento en claro, ignorado por git) y lanza el script
