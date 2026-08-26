@@ -313,8 +313,8 @@ html.listo .estratos{animation:none !important}
           <summary>No consigo entrar</summary>
           <p>
             El acceso lo da la carpeta de Drive <b>Cuaderno REGEN4ANDALUCIA (UJA)</b>: quien la
-            tenga compartida entra, quien no, no. Adem&aacute;s puede haber una lista de correos
-            con acceso. Si tu cuenta es de la UJA y aun as&iacute; no entras, pide que te a&ntilde;adan.
+            tenga compartida entra, quien no, no. Esa lista se lleva desde el panel de
+            proyectos; si eres de la UJA y no entras, pide que te den acceso.
           </p>
         </details>
 
@@ -350,7 +350,6 @@ __BLOB__
                 "https://www.googleapis.com/auth/userinfo.email openid";
   var CARPETA = "Cuaderno REGEN4ANDALUCIA (UJA)";
   var LLAVERO = "clave-cuaderno.txt";
-  var ACCESOS = "accesos.json";
 
   var boton = document.getElementById("entrar");
   var otra  = document.getElementById("otra");
@@ -443,38 +442,6 @@ __BLOB__
     }).then(function(r){ return r.json(); }).then(function(f){ return f.id; });
   }
 
-  function miCorreo(){
-    return api("https://www.googleapis.com/oauth2/v3/userinfo")
-      .then(function(r){ return r.json(); })
-      .then(function(d){ return String(d.email || "").trim().toLowerCase(); })
-      .catch(function(){ return ""; });
-  }
-
-  /* La lista la mantiene el panel de proyectos. Si no existe o esta vacia,
-     entra cualquiera que tenga la carpeta compartida. */
-  function permitido(car){
-    var q = encodeURIComponent("name='" + ACCESOS + "' and '" + car + "' in parents and trashed=false");
-    return api("https://www.googleapis.com/drive/v3/files?q=" + q +
-               "&fields=files(id)&supportsAllDrives=true&includeItemsFromAllDrives=true")
-      .then(function(r){ return r.json(); })
-      .then(function(d){
-        if (!d.files || !d.files.length) return true;
-        return api("https://www.googleapis.com/drive/v3/files/" + d.files[0].id + "?alt=media")
-          .then(function(r){ return r.json(); })
-          .then(function(j){
-            var lista = (j && j.lista) || [];
-            if (!lista.length) return true;
-            return miCorreo().then(function(yo){
-              if (!yo) return true;   /* sin correo no se puede juzgar: no se bloquea */
-              return lista.some(function(c){
-                return String(c.correo || "").trim().toLowerCase() === yo;
-              });
-            });
-          });
-      })
-      .catch(function(){ return true; });   /* si no se puede leer, no se bloquea */
-  }
-
   function leeClave(car){
     var q = encodeURIComponent("name='" + LLAVERO + "' and '" + car + "' in parents and trashed=false");
     return api("https://www.googleapis.com/drive/v3/files?q=" + q +
@@ -536,10 +503,7 @@ __BLOB__
         carpeta = c;
         if (!c) return null;
         di("Abriendo el cuaderno…", true);
-        return permitido(c).then(function(ok){
-          if (!ok) throw new Error("__FUERA__");
-          return leeClave(c);
-        });
+        return leeClave(c);
       })
       .then(function(clave){
         if (clave === null){
@@ -563,9 +527,7 @@ __BLOB__
       .catch(function(err){
         ocupado(false, "Entrar con Google");
         otra.style.display = "block";
-        di(err.message === "__FUERA__"
-          ? "Tu cuenta no está en la lista de acceso de este cuaderno. Pide que te añadan."
-          : (err.message || "No se pudo entrar."));
+        di(err.message || "No se pudo entrar.");
       });
   }
 
