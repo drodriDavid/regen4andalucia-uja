@@ -507,13 +507,17 @@ __BLOB__
       })
       .then(function(clave){
         if (clave === null){
+          if (!carpeta){
+            // Cuenta sin acceso: se dice claro y no se ofrece pegar la clave.
+            ocupado(false, "Entrar con Google");
+            di("Esta cuenta no está autorizada para entrar. Pide acceso al "
+               + "administrador (drodrigu@ujaen.es) o prueba con otra cuenta.");
+            return;
+          }
           pidiendoClave = true;
           caja.classList.add("on");
           ocupado(false, "Guardar y entrar");
-          di(carpeta
-            ? "Primera vez con esta cuenta: pega la clave del cuaderno."
-            : "Con esta cuenta no ves la carpeta del cuaderno. Si tienes la clave, pégala; "
-              + "si no, pide que te compartan la carpeta.");
+          di("Primera vez con esta cuenta: pega la clave del cuaderno.");
           setTimeout(function(){ campo.focus(); }, 40);
           return;
         }
@@ -521,7 +525,7 @@ __BLOB__
           pidiendoClave = true;
           caja.classList.add("on");
           ocupado(false, "Guardar y entrar");
-          di("La clave guardada en Drive no abre este cuaderno. Pega la correcta.");
+          di("La clave guardada no abre este cuaderno. Pega la correcta.");
         });
       })
       .catch(function(err){
