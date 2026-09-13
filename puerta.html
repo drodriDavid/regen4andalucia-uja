@@ -22,22 +22,6 @@
   --btn:#22386B; --on-btn:#FFFFFF;
   --risk:#A2382A; --foco:#1F5FA8;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#0E1626; --paper-2:#161F31; --line:#27354C; --line-2:#1C2739;
-    --ink:#E8EEF7; --ink-2:#AEBCD1; --ink-3:#7F8DA6;
-    --navy:#7FA8E4;
-    --btn:#E3EAF5; --on-btn:#0E1626;
-    --risk:#E58166; --foco:#7FA8E4;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#0E1626; --paper-2:#161F31; --line:#27354C; --line-2:#1C2739;
-  --ink:#E8EEF7; --ink-2:#AEBCD1; --ink-3:#7F8DA6;
-  --navy:#7FA8E4;
-  --btn:#E3EAF5; --on-btn:#0E1626;
-  --risk:#E58166; --foco:#7FA8E4;
-}
 
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -64,10 +48,6 @@ body{
   display:block; width:min(288px,78%); height:auto; margin:0 0 34px;
   background:#FFFFFF; border-radius:3px;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) .logo{padding:16px 20px; margin-left:-20px}
-}
-:root[data-theme="dark"] .logo{padding:16px 20px; margin-left:-20px}
 
 .eyebrow{
   font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:500; letter-spacing:.17em;
